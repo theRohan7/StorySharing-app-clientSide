@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { StoryContext } from "../contexts/StoryContext";
@@ -10,14 +10,10 @@ function ViewStory() {
   const navigate = useNavigate()
   const { storyId } = useParams();
   const { user } = useContext(AuthContext);
-
-  console.log(user);
-  
-  
   const { storyById, likeStorySlide } = useContext(StoryContext);
 
   const [storyData, setStoryData] = useState(null);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [shared, setShared] = useState(false);
@@ -41,9 +37,11 @@ function ViewStory() {
     };
 
     getStoryById();
-  }, [storyId]);
+  }, [storyId, storyById]);
 
   useEffect(() => {
+    if(!storyData || !storyData.storySlides) return;
+
     const timer = setTimeout(() => {
       setCurrentSlide((prev) => (prev !== slides.length - 1 ? prev + 1 : prev));
     }, [15000]);
@@ -61,6 +59,7 @@ function ViewStory() {
   const handleLikeSlide = async(storyId, slideId) => {
     if(!user) {
       navigate('/login')
+      return;
     }
     try {
       const response = await likeStorySlide(storyId, slideId)
@@ -88,6 +87,7 @@ function ViewStory() {
   const handleBookmarkStory = async(storyId) => {
     if(!user) {
       navigate('/login')
+      return;
     }
     setIsBookmarked(prev => !prev)
     try {
@@ -102,7 +102,7 @@ function ViewStory() {
     }
   }
 
-  const handleShareStory = (storyId) => {
+  const handleShareStory = useCallback((storyId) => {
     navigator.clipboard
       .writeText(`${window.location.origin}/view-story/${storyId}`)
       .then(() => {
@@ -111,16 +111,16 @@ function ViewStory() {
           setShared(false);
         }, 2000);
       });
-  };
+  },[]);
 
-  const isVideoUrl = (url) => {
+  const isVideoUrl =  (url) => {
     const videoExtensions = ["mp4", "webm", "ogg"];
     return videoExtensions.some(extension => url.toLowerCase().endsWith(extension));
   }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>ERROR: {error}</p>;
-  if (!storyData) return <p>No Story Data Available</p>;
+  if (!storyData || !storyData.storySlides || storyData.storySlides.length === 0 ) return <p>No Story Data Available</p>;
 
   return (
     <div className="overlay">
