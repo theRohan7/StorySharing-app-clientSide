@@ -1,0 +1,58 @@
+.story-card {
+    height: 28rem;
+    width: 17.5rem;
+    margin: 2rem;
+    border-radius: 0.5rem ;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+  }
+
+.story-card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.story-card .edit-btn {
+    position: absolute;
+    width: 6rem;
+    bottom: -1rem;
+    right: 5rem;
+    padding: 0.7rem;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.story-content {
+    position: absolute;
+    bottom: 1rem;
+    padding: 1rem;
+}
+
+.story-content h3 {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 29px;
+}
+
+.story-content p {
+    color: white;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width: 640px) {
+  
+   
+}
+

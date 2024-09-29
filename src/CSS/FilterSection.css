@@ -1,0 +1,127 @@
+.filter-container {
+    width: 100%;
+    height: 33vh;
+    background-color: #fff;
+    padding: 15px 0px 15px 15px ;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+
+}
+
+.category-list {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding: 10px 0;
+}
+
+.category-list::-webkit-scrollbar {
+    display: none;
+}
+
+.category-card {
+    min-width: 260px; ;
+    max-height: 190px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-right: 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.category-card:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.category-card.active {
+    border: 5px solid #00f; 
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.category-heading {
+    position: absolute;
+    color: white;
+    font-family: DM Sans;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 39.06px;
+    text-align: center;
+
+}
+
+@media screen and (max-width: 768px) {
+    
+    .filter-container {
+        height: 35vh;
+        padding: 10px 0px 10px 10px; 
+    }
+
+    
+    .category-card:hover {
+        transform: none; 
+        box-shadow: none; /
+    }
+
+    
+    .category-card {
+        min-width: 230px; ;
+        max-height: 180px ;
+        margin-right: 15px;
+
+    }
+
+    
+    .category-heading {
+        font-size: 24px; 
+        line-height: 30px;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 550px) {
+
+
+    .filter-container{
+        min-height: 35vh;
+        padding: 10px 0px 10px 10px;
+    }
+
+    .category-card:hover {
+        transform: none;
+        box-shadow: none; 
+        
+    }
+    
+    .category-card.active {
+        border: 5px solid #00f; 
+    }
+
+    .category-heading {
+        font-size: 24px; 
+        line-height: 30px;
+    }
+
+    
+   
+}
