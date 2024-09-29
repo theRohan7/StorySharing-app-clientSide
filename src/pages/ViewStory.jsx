@@ -37,7 +37,7 @@ function ViewStory() {
     };
 
     getStoryById();
-  }, [storyId, storyById]);
+  }, [storyId]);
 
   useEffect(() => {
     if(!storyData || !storyData.storySlides) return;
