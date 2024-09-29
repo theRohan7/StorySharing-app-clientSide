@@ -9,7 +9,6 @@ function ViewStory() {
 
   const navigate = useNavigate()
   const { storyId } = useParams();
-  console.log(storyId);
   const { user } = useContext(AuthContext);
   const { storyById, likeStorySlide } = useContext(StoryContext);
 
@@ -27,8 +26,6 @@ function ViewStory() {
       try {
         setloading(true);
         const data = await storyById(storyId);
-        console.log(data);
-        
         setStoryData(data);
         setError(null);
       } catch (error) {
@@ -125,8 +122,6 @@ function ViewStory() {
   if (error) return <p>ERROR: {error}</p>;
   if (!storyData || !storyData.storySlides || storyData.storySlides.length === 0 ) return <p>No Story Data Available</p>;
 
-  console.log(storyData);
-  
 
   return (
     <div className="overlay">
@@ -184,7 +179,7 @@ function ViewStory() {
               className="ri-heart-fill"
               style={{
                 color: `${
-                  slides[currentSlide].likedBy.includes(user._id)
+                  user && slides[currentSlide].likedBy.includes(user._id)
                     ? "red"
                     : "white"
                 }`,
