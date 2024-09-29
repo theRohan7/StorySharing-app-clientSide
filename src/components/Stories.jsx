@@ -75,7 +75,7 @@ function Stories() {
                   </div>
                 ) : (
                   <>
-                    <div className="story-cards">
+                    <div className="story-cards-container">
                       {filteredStories
                         .slice(
                           0,
