@@ -3,6 +3,7 @@ import { fetchStoryById, fetchUserStories, getBookmarkedStories, likeSlide, post
 import { BACKEND_URL } from "../utils/constants";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 export const StoryContext = createContext();
 
@@ -57,12 +58,13 @@ export const StoryProvider = ({ children }) => {
          try {
             const response = await postStory(slides, category);
             if(response.status === 200) {
+                toast.success("Story Created Successfully");
                 setUserStories(prevStories => [...prevStories, response.data.data]);
                 setStories(prevStories => [...prevStories, response.data.data]);
             }
             
          } catch (error) {
-            console.error(error)
+            throw new Error(error.message)
          }
     }
 
@@ -70,6 +72,7 @@ export const StoryProvider = ({ children }) => {
         try {
             const response = await updateStory(storyId, slides, category);
             if(response.status === 200) {
+                toast.success("Story Edited Successfully");
                 setUserStories(prevStories =>
                      prevStories.map(story => story._id === storyId ? response.data.data : story));
                 setStories(prevStories =>

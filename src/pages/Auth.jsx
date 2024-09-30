@@ -113,10 +113,11 @@ function Register() {
               {error}
             </p>
           )}
-          <button type="submit" disabled={loading} className="register-btn">
+          <button type="submit" disabled={loading} className="register-btn" style={{marginBottom: "30px"}}>
             {loading ? "Loading.." : "Register"}
           </button>
         </form>
+        <div>Already have an account? <span onClick={() => navigate("/login")} style={{textDecoration: "underline", cursor: "pointer", color: "#FF7373", fontWeight: "bold"}}>Login</span></div>
       </div>
     </div>
   );
@@ -175,7 +176,7 @@ function Login() {
     <div className="overlay">
       <div onSubmit={handleSubmit} className="box-container">
           <button className='close-form-btn' onClick={() => navigate(-1)}  >X</button>
-          <h3>Sign In</h3>
+          <h3>Login</h3>
           <form className="auth-form">
             <div className="label-input">
               <label htmlFor="username">Username:</label>
@@ -209,7 +210,7 @@ function Login() {
               </div>
             </div>
             {error && <p className="error-message" style={{color: "red",fontWeight: "bold", marginBottom: "10px"}}>{error}</p>}
-            <button type="submit" disabled={loading} className="login-btn">
+            <button type="submit" disabled={loading} className="login-btn" style={{marginBottom:'30px'}}>
               {loading ? (
                 "Loading.."
               ) : (
@@ -217,6 +218,8 @@ function Login() {
               )}
             </button>
           </form>
+
+          <div>Don't have an account? <span onClick={() => navigate("/register")} style={{textDecoration: "underline", cursor: "pointer", color: "#73ABFF", fontWeight: "bold"}}>Register</span></div>
         </div>
     </div>
   )

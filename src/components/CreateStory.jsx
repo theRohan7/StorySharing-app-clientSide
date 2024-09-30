@@ -8,7 +8,6 @@ function CreateStory({ editingStory, onClose }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [category, setCategory] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState(false);
   const [error, setError] = useState("");
   const [slides, setSlides] = useState([
     { heading: "", description: "", mediaURL: "" },
@@ -26,28 +25,19 @@ function CreateStory({ editingStory, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setUploadError(false);
-    setIsUploading(true);
     try {
+      setIsUploading(true);
       if (editingStory) {
         await editStory(editingStory._id, slides, category);
-        toast.success("Story Edited Successfully");
       } else {
         await createStory(slides, category);
-        toast.success("Story Created Successfully");
       }
-
+      onClose();
+      setIsUploading(false)
       await getUserStory();
     } catch (error) {
-      setError(
-        error.message || editingStory
-          ? "Edit Story Failed"
-          : "Create Story Failed"
-      );
-    } finally {
-      onClose();
+      setError(error.message);
       setIsUploading(false);
-      setUploadError(false);
     }
   };
 
@@ -160,17 +150,18 @@ function CreateStory({ editingStory, onClose }) {
                   <option value="India">India</option>
                 </select>
               </div>
-              {error ? (
-                <p className="validation-error">All fields Required</p>
-              ) : (
-                ""
-              )}
-              {uploadError ? (
-                <p className="upload-error">
-                  Error While Uploading, Video limit exceeds 15-seconds.
+              {error && (
+                <p
+                  className="error-container"
+                  style={{
+                    color: "red",
+                    fontSize: "1.25rem",
+                    textAlign: "right",
+                    fontWeight: "700",
+                  }}
+                >
+                  {error}
                 </p>
-              ) : (
-                ""
               )}
               {isUploading ? (
                 <p className="upload-loader">Uploading...</p>

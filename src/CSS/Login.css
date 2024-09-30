@@ -81,13 +81,13 @@
 .login-btn {
     background-color: #73ABFF;
 }
+.login-btn:hover {
+    background-color: #3264b1;
+}
 .register-btn {
     background-color: #FF7373;
 }
-.login-btn :hover {
-    background-color: #3264b1;
-}
-.register-btn :hover {
+.register-btn:hover {
     background-color: #bb3c3c;
 }
 
