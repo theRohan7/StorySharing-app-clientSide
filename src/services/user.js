@@ -3,9 +3,7 @@ import { BACKEND_URL } from "../utils/constants.js"
 
 const registerUser = async ({username, password}) => {
     try {
-        console.log(username, password);
-        
-   
+
         const response = await axios.post(`${BACKEND_URL}/user/register`,{
             username,
             password

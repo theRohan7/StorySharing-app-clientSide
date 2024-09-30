@@ -35,11 +35,11 @@ function Navbar() {
     }
   }
   const handleRegister = () => {
-    setShowRegister(true)
+    // setShowRegister(true)
     navigate('/register')
   }
   const handleCloseRegister = () => {
-    setShowRegister(false)
+    // setShowRegister(false)
     if(location.pathname === '/register') {
       navigate(-1);
     }

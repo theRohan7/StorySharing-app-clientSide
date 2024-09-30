@@ -23,6 +23,7 @@ export const AuthProvider = ({children}) => {
     },[])
 
     const getUser = async (token) => {
+       
         setLoading(true)
         console.log("in get user func. : loading status: ", loading);
         
@@ -32,14 +33,10 @@ export const AuthProvider = ({children}) => {
                 Authorization: token
             }
         })
-        console.log("API Fetching complete, loading STatus: ", loading);
-  
         setUser(response.data.data)
-        console.log("set user with response data, loading STatus: ", loading);
-
+       
         setLoading(false)   
-        console.log("everything done, loading STatus: ", loading);
-             
+        console.log("everything done, loading STatus: ", loading);        
     }
 
 

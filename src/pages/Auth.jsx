@@ -7,12 +7,13 @@ import "../CSS/Login.css"
 
 
 
-function Register({onClose}) {
+function Register() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const {login} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -26,76 +27,107 @@ function Register({onClose}) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    console.log("submitting");
     setLoading(true);
-
-    if (!formData.username ) {
-      setError(true);
-      toast.error("Username is required");
-    } else if(!formData.password) {
-      toast.error("Password is required");
-      setError(true);
-    }
-
+    e.preventDefault();
+    if (!formData.username || !formData.password) setError(true);
     try {
       const { username, password } = formData;
       const response = await registerUser({ username, password });
-
+       console.log(response);
+       
       if(response.status === 201) {
-        toast.success("User registered succesfully.")
-        login(response.data.data, response.data.data.token)
+        toast.success("User Registered succesfully.")
         setError(false)
-        onClose()
-        navigate("/")
+        navigate('/login');
       }
+
     } catch (error) {
-      setError(true);
-      toast.error(error.response.data.message);
-      console.log(error);
+      console.error(error.message);
+      setError(error.message)
     } finally {
       setLoading(false);
     }
   };
 
+  const toggleShowpassword = () => {
+    setShowPassword(!showPassword);
+  }
+
+
+  
    
 
   return (
-    <div className='overlay'>
-    <div onSubmit={handleSubmit} className="box-container">
-    <button className='close-form-btn' onClick={() => navigate(-1)}  >X</button>
-      <h3>Register</h3>
-      <form className="auth-form">
-        <div className="label-input">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            onChange={handleChange}
-            placeholder="Enter username"
-            value={formData.username}
-          />
-        </div>
-        <div className="label-input">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            placeholder="Enter password"
-            value={formData.password}
-          />
-        </div>
-        <button type="submit" disabled={loading} className="register-btn">
-          {loading ? (
-            "Loading.."
-          ) : (
-            "Register"
-          )}
+    <div className="overlay">
+      <div onSubmit={handleSubmit} className="box-container">
+        <button className="close-form-btn" onClick={() => navigate(-1)}>
+          X
         </button>
-      </form>
+        <h3>Register</h3>
+        <form className="auth-form">
+          <div className="label-input">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              onChange={handleChange}
+              style={{ borderColor: error ? "red" : "" }}
+              placeholder="Enter username"
+              value={formData.username}
+            />
+          </div>
+          <div className="label-input">
+            <label htmlFor="password">Password</label>
+            <div
+              className="password-input-container"
+              style={{ position: "relative" }}
+            >
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                onChange={handleChange}
+                placeholder="Enter password"
+                style={{ borderColor: error ? "red" : "", padding: "8px" }}
+                value={formData.password}
+              />
+              <button
+                type="button"
+                onClick={toggleShowpassword}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  right: "-2rem",
+                  transform: "translateY(-50%)",
+                  color: "black",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {showPassword ? (
+                  <i className="ri-eye-off-line"></i>
+                ) : (
+                  <i className="ri-eye-line"></i>
+                )}
+              </button>
+            </div>
+          </div>
+          {error && (
+            <p
+              className="error-message"
+              style={{ color: "red", fontWeight: "bold", marginBottom: "10px" }}
+            >
+              {error}
+            </p>
+          )}
+          <button type="submit" disabled={loading} className="register-btn">
+            {loading ? "Loading.." : "Register"}
+          </button>
+        </form>
+      </div>
     </div>
-</div>
-  )
+  );
 }
 
 
@@ -103,8 +135,9 @@ function Login() {
 
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
-    const [error, setError] = useState(false)
+    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
       username: "",
       password: "",
@@ -135,11 +168,16 @@ function Login() {
           }
     
         } catch (error) {
+          setError(error.message)
           console.log(error);
         } finally {
           setLoading(false);
         }
       };
+
+      const toggleShowpassword = () => {
+        setShowPassword(!showPassword);
+      }
 
   return (
     <div className="overlay">
@@ -160,15 +198,34 @@ function Login() {
             </div>
             <div className="label-input">
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                placeholder="Enter password"
-                style={{borderColor: error ? "red" : ""}}
-                value={formData.password}
-              />
+              <div className="password-input-container" style={{position: "relative"}}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  onChange={handleChange}
+                  placeholder="Enter password"
+                  style={{borderColor: error ? "red" : "", padding:"8px"}}
+                  value={formData.password}
+                />
+                <button
+                  type='button'
+                  onClick={toggleShowpassword}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '-2rem',
+                    transform: 'translateY(-50%)',
+                    color: 'black',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {showPassword ? <i className="ri-eye-off-line"></i> : <i className="ri-eye-line"></i> }
+                </button>
+              </div>
             </div>
+            {error && <p className="error-message" style={{color: "red",fontWeight: "bold", marginBottom: "10px"}}>{error}</p>}
             <button type="submit" disabled={loading} className="login-btn">
               {loading ? (
                 "Loading.."
