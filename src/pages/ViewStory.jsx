@@ -133,7 +133,7 @@ function ViewStory() {
 
 
   return (
-    <div className="overlay">
+    <div className="story-viewer">
       <div className="slide-container">
         <div className="progress-bar-container">
           {slides.map((slide, index) => (
