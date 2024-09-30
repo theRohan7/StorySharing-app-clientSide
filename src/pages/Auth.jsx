@@ -38,8 +38,9 @@ function Register() {
        
       if(response.status === 201) {
         toast.success("User Registered succesfully.")
+        login(response.data.data.user, response.data.data.token)
         setError(false)
-        navigate('/login');
+        navigate(-1);
       }
 
     } catch (error) {
@@ -106,9 +107,9 @@ function Register() {
                 }}
               >
                 {showPassword ? (
-                  <i className="ri-eye-off-line"></i>
+                  <i className="fa-solid fa-eye-slash"></i>
                 ) : (
-                  <i className="ri-eye-line"></i>
+                  <i className="fa-solid fa-eye"></i>
                 )}
               </button>
             </div>
@@ -221,7 +222,7 @@ function Login() {
                     cursor: 'pointer'
                   }}
                 >
-                  {showPassword ? <i className="ri-eye-off-line"></i> : <i className="ri-eye-line"></i> }
+                  {showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i> }
                 </button>
               </div>
             </div>

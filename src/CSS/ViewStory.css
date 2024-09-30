@@ -71,9 +71,11 @@
     justify-content: space-between;
     position: absolute;
     top: 2rem;
+    padding: 0.5rem 1rem;
 }
 .like-bookmark {
     position: absolute;
+    padding: 0.5rem 1rem;
     bottom: 1.5rem;
     width: 100%;
     display: flex;

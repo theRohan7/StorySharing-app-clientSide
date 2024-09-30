@@ -56,7 +56,7 @@ function Navbar() {
         <div className="nav-container" >
           <div className="nav-btns">
             <button className="bookmark-btn" onClick={() => navigate("/bookmarks")} >
-              <i className="ri-bookmark-fill"></i> Bookmarks
+             <i className="fa-solid fa-bookmark"></i>  Bookmarks
             </button>
             <button className="addstory-btn" onClick={handleAddStory}>
               Add Story
@@ -67,12 +67,12 @@ function Navbar() {
               onClick={() => setShowUserMenu(!showUserMenu)}
             />
             <button className="menu-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
-              <i className="ri-menu-line"></i>
+             <i className="fa-solid fa-bars"></i>
             </button>
           </div>
           <div className="hamburger-menu">
             <button onClick={() => setShowMobileMenu(!showMobileMenu)} >
-              <i className="ri-menu-line"></i>
+             <i className="fa-solid fa-bars"></i>
             </button>
           </div>
           {showUserMenu && (
@@ -93,7 +93,7 @@ function Navbar() {
 
               </div>
               <button onClick={handleAddStory} className="addstory-btn" >Add Story</button>
-              <button onClick={() => navigate("/bookmarks")} className="bookmark-btn" ><i className="ri-bookmark-fill"></i> Bookmarks</button>
+              <button onClick={() => navigate("/bookmarks")} className="bookmark-btn" ><i className="fa-solid fa-bookmark"></i> Bookmarks</button>
               <button onClick={handleLogout} className="logout-btn" >Logout</button>
             </div>
           )}
@@ -106,7 +106,7 @@ function Navbar() {
           </div>
           <div className="hamburger-menu">
             <button>
-              <i className="ri-menu-line"></i>
+             <i className="fa-solid fa-bars"></i>
             </button>
           </div>
         </div>

@@ -159,42 +159,39 @@ function ViewStory() {
         </div>
         <div className="close-share">
           <button onClick={() => navigate("/")}>
-            <i className="ri-close-line"></i>
+            <i className="fa-solid fa-xmark"></i>
           </button>
           <button onClick={() => handleShareStory(storyId)}>
-            <i className="ri-send-plane-fill"></i>
+           <i className="fa-solid fa-paper-plane"></i>
           </button>
         </div>
         <div className="like-bookmark">
           <button onClick={() => handleBookmarkStory(storyId)}>
-            <i
-              className="ri-bookmark-fill"
-              style={{ color: isBookmarked ? "blue" : "white" }}
-            ></i>
+            <i className="fa-solid fa-bookmark" style={{ color: isBookmarked ? "blue" : "white" }} ></i>
           </button>
           <button
             onClick={() => handleLikeSlide(storyId, slides[currentSlide]._id)}
           >
-            <i
-              className="ri-heart-fill"
-              style={{
-                color: `${
-                  user && slides[currentSlide].likedBy.includes(user._id)
-                    ? "red"
-                    : "white"
-                }`,
-              }}
+            <i 
+            class="fa-solid fa-heart"
+            style={{
+              color: `${
+                user && slides[currentSlide].likedBy.includes(user._id)
+                  ? "red"
+                  : "white"
+              }`,
+            }} 
             >
-              {slides[currentSlide].likesCount}
+            &nbsp; {slides[currentSlide].likesCount}
             </i>
           </button>
         </div>
       </div>
       <button className="next-slide-btn" onClick={handleNextSlide}>
-        <i className="ri-arrow-right-s-line"></i>
+        <i className="fa-solid fa-chevron-right"></i>
       </button>
       <button className="prev-slide-btn" onClick={handlePrevSlide}>
-        <i className="ri-arrow-left-s-line"></i>
+        <i className="fa-solid fa-chevron-left"></i>
       </button>
     </div>
   );

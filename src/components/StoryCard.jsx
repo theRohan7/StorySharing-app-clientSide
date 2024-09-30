@@ -2,7 +2,6 @@ import React, {  useState } from "react";
 import "../CSS/StoryCard.css";
 import CreateStory from "./CreateStory";
 import { useNavigate } from "react-router-dom";
-// import ViewStory from "./ViewStory";
 
 
 
@@ -37,7 +36,7 @@ function StoryCard({ story, canEdit, canView }) {
         style={{ display: `${canEdit ? "block" : "none"}` }}
         onClick={editStory}
       >
-        Edit
+       <i className="fa-solid fa-pen-to-square"></i> Edit
       </button>
     </div>
     {editStoryForm  && <CreateStory editingStory={story} onClose = {closeEditStory} /> }

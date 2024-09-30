@@ -26,8 +26,6 @@ const filterStory = async(activeFilters) => {
       const queryString = activeFilters.length >= 0 ? activeFilters.map(filter => `categories=${encodeURIComponent(filter)}`).join("&") : 'categories='
       const URL = `${BACKEND_URL}/story/filter?${queryString}` 
     
-      
-
       const response = await axios.get(URL)
       return response;
       
@@ -38,9 +36,7 @@ const filterStory = async(activeFilters) => {
 }
 
 const postStory = async(slides, category) => {
-  try {
-      console.log(category, slides);
-      
+  try {   
       const URL = `${BACKEND_URL}/story/create-story`
       const token = localStorage.getItem('story-token')
 
@@ -54,11 +50,7 @@ const postStory = async(slides, category) => {
       
       return response
   } catch (error) {
-      if(error.response && error.response.data) {
-          throw new Error(error.response.data.message);
-      } else {
-          throw new Error("Something went wrong! Please try Again.")
-      }
+      throw new Error(error.response.data.message)
   }
 }
 

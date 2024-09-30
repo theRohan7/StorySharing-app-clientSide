@@ -24,19 +24,23 @@ export const AuthProvider = ({children}) => {
 
     const getUser = async (token) => {
        
-        setLoading(true)
-        console.log("in get user func. : loading status: ", loading);
-        
-        const URL = `${BACKEND_URL}/user/user-details`
-        const response = await axios.get(URL, {
-            headers: {
-                Authorization: token
-            }
-        })
-        setUser(response.data.data)
-       
-        setLoading(false)   
-        console.log("everything done, loading STatus: ", loading);        
+       try {
+         setLoading(true)
+         console.log("in get user func. : loading status: ", loading);
+         
+         const URL = `${BACKEND_URL}/user/user-details`
+         const response = await axios.get(URL, {
+             headers: {
+                 Authorization: token
+             }
+         })
+         setUser(response.data.data)
+         setLoading(false)   
+         console.log("everything done, loading STatus: ", loading);
+
+       } catch (error) {
+        console.error(error)
+       }        
     }
 
 
@@ -50,21 +54,29 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem('story-token');
     }
 
-    if(loading) {
-        return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-            <RotatingLines
-        visible={true}
-        height="96"
-        width="96"
-        color="grey"
-        strokeWidth="5"
-        animationDuration="0.75"
-        ariaLabel="rotating-lines-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        />
-
-            </div>
+    if (loading) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <RotatingLines
+            visible={true}
+            height="96"
+            width="96"
+            color="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      );
     }
 
     return (
