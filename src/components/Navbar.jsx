@@ -21,6 +21,7 @@ function Navbar() {
   
   const handleAddStory = () => {
     setCreateStory(true)
+    setShowMobileMenu(false)
    
   }
   const handleCloseAddStory = () => {
@@ -35,17 +36,16 @@ function Navbar() {
     }
   }
   const handleRegister = () => {
-    // setShowRegister(true)
     navigate('/register')
   }
   const handleCloseRegister = () => {
-    // setShowRegister(false)
     if(location.pathname === '/register') {
       navigate(-1);
     }
   }
 
   const handleLogout = () => {
+    setShowMobileMenu(false)
     logout();
   }
    
@@ -89,7 +89,7 @@ function Navbar() {
                alt="Profile-image" 
               />
               <p>{user.username}</p>
-              <button  >close</button>
+              <button className="close-btn" onClick={() => setShowMobileMenu(false)} ><i className="fa-solid fa-xmark"></i></button>
 
               </div>
               <button onClick={handleAddStory} className="addstory-btn" >Add Story</button>
@@ -105,10 +105,16 @@ function Navbar() {
             <button className="signin-btn" onClick={handleLogin} >Sign In</button>
           </div>
           <div className="hamburger-menu">
-            <button>
+            <button onClick={() => setShowMobileMenu(!showMobileMenu)} >
              <i className="fa-solid fa-bars"></i>
             </button>
           </div>
+          {showMobileMenu && (
+            <div className="mobile-menu"> 
+              <button onClick={handleRegister} className="register-btn" style={{marginBottom: '2rem'}} >Register</button>
+              <button onClick={handleLogin} className="signin-btn" >Login</button>
+            </div>
+          )}
         </div>
       )}
 

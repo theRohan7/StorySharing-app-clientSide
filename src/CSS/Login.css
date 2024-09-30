@@ -91,6 +91,16 @@
     background-color: #bb3c3c;
 }
 
+.password-input-container .pass-eye-btn  {
+    position: absolute;
+    top: 50%;
+    right: -15%;
+    transform: translateY(-50%);
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
 
 

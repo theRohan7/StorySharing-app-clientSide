@@ -18,6 +18,7 @@ function ViewStory() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [shared, setShared] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
   const slides = storyData?.storySlides || [];
 
@@ -113,6 +114,14 @@ function ViewStory() {
       });
   },[]);
 
+  const handleDownload = (url) => {
+ 
+    setDownloaded(true);
+    setTimeout(() => {
+      setDownloaded(false);
+    }, 3000);
+  }
+
   const isVideoUrl =  (url) => {
     const videoExtensions = ["mp4", "webm", "ogg"];
     return videoExtensions.some(extension => url.toLowerCase().endsWith(extension));
@@ -169,11 +178,12 @@ function ViewStory() {
           <button onClick={() => handleBookmarkStory(storyId)}>
             <i className="fa-solid fa-bookmark" style={{ color: isBookmarked ? "blue" : "white" }} ></i>
           </button>
+          <button onClick={() => handleDownload(slides[currentSlide].mediaURL)} >{downloaded ? <><i className="fa-solid fa-check"></i> <div className="download-msg">Download sucessfull!</div></> : <i className="fa-solid fa-down-long"></i>}</button>
           <button
             onClick={() => handleLikeSlide(storyId, slides[currentSlide]._id)}
           >
             <i 
-            class="fa-solid fa-heart"
+            className="fa-solid fa-heart"
             style={{
               color: `${
                 user && slides[currentSlide].likedBy.includes(user._id)

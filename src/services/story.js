@@ -19,22 +19,6 @@ const fetchUserStories = async() => {
     }
 }
 
-const filterStory = async(activeFilters) => {
-
-  try {
-     
-      const queryString = activeFilters.length >= 0 ? activeFilters.map(filter => `categories=${encodeURIComponent(filter)}`).join("&") : 'categories='
-      const URL = `${BACKEND_URL}/story/filter?${queryString}` 
-    
-      const response = await axios.get(URL)
-      return response;
-      
-      
-  } catch (error) {
-      throw new Error(error.response.data.message)
-  }
-}
-
 const postStory = async(slides, category) => {
   try {   
       const URL = `${BACKEND_URL}/story/create-story`
@@ -140,7 +124,6 @@ const getBookmarkedStories = async() => {
 
 export {
     fetchUserStories,
-    filterStory,
     postStory,
     updateStory,
     fetchStoryById,

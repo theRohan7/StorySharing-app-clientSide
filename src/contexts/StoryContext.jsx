@@ -1,5 +1,8 @@
-import { createContext, useState } from "react";
-import { fetchStoryById, fetchUserStories, filterStory, getBookmarkedStories, likeSlide, postStory, updateStory } from "../services/story";
+import { createContext, useEffect, useState } from "react";
+import { fetchStoryById, fetchUserStories, getBookmarkedStories, likeSlide, postStory, updateStory } from "../services/story";
+import { BACKEND_URL } from "../utils/constants";
+import axios from "axios";
+import { RotatingLines } from "react-loader-spinner";
 
 export const StoryContext = createContext();
 
@@ -9,20 +12,44 @@ export const StoryProvider = ({ children }) => {
     const [activeFilters, setActiveFilters] = useState([]);
     const [userStories, setUserStories] = useState([]);
     const [viewStoryData, setViewStoryData] = useState({});
+    const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        const getStories = async () => {
+            
+            try {
+                setLoading(true);
+                const data = await fetchStories(activeFilters);
+                setStories(data); 
+            } catch (error) {
+                console.error(error.message)
+            }finally {
+                setLoading(false);
+            }
+            console.log("getStories func completed, loading stat: ", loading);
+        }
+
+        getStories(); 
+    },[])
 
     const changeFilter = (filter) => {
         setActiveFilters(filter);
     };
 
-    const fetchStories = async () => {
+    const fetchStories = async (activeFilters) => {
         try {
-            const response = await filterStory(activeFilters);
+            const queryString = activeFilters.length >= 0 ? activeFilters.map(filter => `categories=${encodeURIComponent(filter)}`).join("&") : 'categories='
+            const URL = `${BACKEND_URL}/story/filter?${queryString}` 
+          
+            const response = await axios.get(URL)  
             if(response.status === 200) {
-                setStories(response.data.data);
+                return response.data.data
             }
             
         } catch (error) {
             console.error(error)
+            throw new Error(error.response.data.message)
         }
     }
 
@@ -101,7 +128,31 @@ export const StoryProvider = ({ children }) => {
         }
     }
 
-
+    if(loading) {
+        return (
+            <div
+             style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+              }}
+            >
+                Fetching Stories &nbsp;
+                <RotatingLines
+                    visible={true}
+                    height="50"
+                    width="50"
+                    color="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />
+          </div>
+        )
+    }
 
     return(
         <StoryContext.Provider value={{fetchStories,createStory,editStory, getUserStory, fetchBookmarkStories ,likeStorySlide, storyById ,  changeFilter, activeFilters, stories, userStories, viewStoryData}} >

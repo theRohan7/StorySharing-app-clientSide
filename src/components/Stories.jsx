@@ -4,13 +4,9 @@ import StoryCard from './StoryCard';
 
 function Stories() {
 
-  const {activeFilters,fetchStories, stories} = useContext(StoryContext)
+  const {activeFilters, stories} = useContext(StoryContext)
   const [showAllStories, setShowAllStories] = useState(false);
   const [expandedCategories, setExpandedCategories] = useState([[]]);
-
-  useEffect(() => {
-    fetchStories(activeFilters)
-  },[])
 
   const toggleShowMore = (category = null) => {
     if (category) {

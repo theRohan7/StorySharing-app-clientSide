@@ -68,7 +68,7 @@ function Register() {
         <h3>Register</h3>
         <form className="auth-form">
           <div className="label-input">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Username:</label>
             <input
               type="text"
               name="username"
@@ -79,7 +79,7 @@ function Register() {
             />
           </div>
           <div className="label-input">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password:</label>
             <div
               className="password-input-container"
               style={{ position: "relative" }}
@@ -94,17 +94,8 @@ function Register() {
               />
               <button
                 type="button"
+                className='pass-eye-btn'
                 onClick={toggleShowpassword}
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  right: "-2rem",
-                  transform: "translateY(-50%)",
-                  color: "black",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                }}
               >
                 {showPassword ? (
                   <i className="fa-solid fa-eye-slash"></i>
@@ -187,7 +178,7 @@ function Login() {
           <h3>Sign In</h3>
           <form className="auth-form">
             <div className="label-input">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Username:</label>
               <input
                 type="text"
                 name="username"
@@ -198,7 +189,7 @@ function Login() {
               />
             </div>
             <div className="label-input">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password:</label>
               <div className="password-input-container" style={{position: "relative"}}>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -211,16 +202,7 @@ function Login() {
                 <button
                   type='button'
                   onClick={toggleShowpassword}
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    right: '-2rem',
-                    transform: 'translateY(-50%)',
-                    color: 'black',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
+                  className='pass-eye-btn'
                 >
                   {showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i> }
                 </button>

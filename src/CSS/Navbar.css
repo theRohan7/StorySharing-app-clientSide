@@ -129,6 +129,14 @@ nav{
   object-fit: cover;
 }
 
+.mobile-menu .close-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0rem;
+  right: 2.5rem;
+}
 .user-menu p {
   font-weight: bold;
   font-size: 1.2rem;

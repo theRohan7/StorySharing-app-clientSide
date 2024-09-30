@@ -153,6 +153,22 @@
     left: 19rem;
 }
 
+.download-msg {
+    position: absolute;
+    background-color: grey;
+    top: -50%;
+    left: 30%;
+    font-family: DM Sans;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 14.31px;
+    text-align: center;
+    color:#FFFFFF ;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: 0.57px solid #4C4C4C
+}
+
 
 
 
