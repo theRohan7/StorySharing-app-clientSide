@@ -155,7 +155,7 @@ function CreateStory({ editingStory, onClose }) {
                   className="error-container"
                   style={{
                     color: "red",
-                    fontSize: "1.25rem",
+                    fontSize: "1rem",
                     textAlign: "right",
                     fontWeight: "700",
                   }}

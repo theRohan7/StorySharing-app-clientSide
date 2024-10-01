@@ -115,6 +115,15 @@ function ViewStory() {
   },[]);
 
   const handleDownload = (url) => {
+    const link = document.createElement('a')
+    link.href = url;
+
+    const fileName = url.split('/').pop() || 'story-sharing-file'
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
  
     setDownloaded(true);
     setTimeout(() => {

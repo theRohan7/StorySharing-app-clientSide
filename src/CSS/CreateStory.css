@@ -174,7 +174,7 @@
 .buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
 }
 
 .navigate-slide-btn {
@@ -234,14 +234,6 @@
 
 }
 
-.validation-error{
-    font-family: DM Sans;
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 23.44px;
-    color: red;
-    text-align: center;
-}
 
 
 @media screen and (max-width: 640px)  {
