@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function StoryCard({ story, canEdit, canView }) {
+function StoryCard({ story, canEdit }) {
 
 
   const navigate = useNavigate();
@@ -18,15 +18,31 @@ function StoryCard({ story, canEdit, canView }) {
     setEditStoryForm(false)
   }
 
+  const isVideoUrl =  (url) => {
+    const videoExtensions = ["mp4", "webm", "ogg"];
+    return videoExtensions.some(extension => url.toLowerCase().endsWith(extension));
+  }
+
 
   return (
     <>
     <div className="story-card" >
-      <img
-        src={story.storySlides[0].mediaURL}
-        alt="image of 1st slide of story"
-        onClick={() => navigate(`/view-story/${story._id}`)}
-      />
+    {isVideoUrl(story.storySlides[0].mediaURL) ? (
+          <video
+           src={story.storySlides[0].mediaURL}
+           alt="Video thumbnail"
+           onClick={() => navigate(`/view-story/${story._id}`)}
+           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+           preload="metadata"
+          />
+          
+        ): (
+          <img 
+           src={story.storySlides[0].mediaURL} 
+           alt="Slide Content Image" 
+           onClick={() => navigate(`/view-story/${story._id}`)}
+          />
+        )}
       <div className="story-content">
         <h3>{story.storySlides[0].heading }</h3>
         <p>{story.storySlides[0].description }</p>

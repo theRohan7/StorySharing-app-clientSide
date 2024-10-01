@@ -59,7 +59,17 @@
 
 
 @media screen and (max-width: 640px) {
-  
-   
+    .story-card {
+        width: 25rem;
+        height: 48rem;
+    }
+    
+    .story-card .edit-btn {
+        right: 39%;
+    }
+
+    .story-content {
+        bottom: 2.5rem;
+    }
 }
 
