@@ -150,19 +150,16 @@ function CreateStory({ editingStory, onClose }) {
                   <option value="India">India</option>
                 </select>
               </div>
-              {error && (
-                <p
-                  className="error-container"
-                  style={{
-                    color: "red",
-                    fontSize: "1rem",
-                    textAlign: "right",
-                    fontWeight: "700",
-                  }}
-                >
-                  {error}
-                </p>
-              )}
+              <div className="error-container"
+              style={{
+                color: "red",
+                fontSize: "1rem",
+                textAlign: "right",
+                fontWeight: "700",
+              }}
+              >
+                {error && <p className="error-message">{error}</p>}
+              </div>
               {isUploading ? (
                 <p className="upload-loader">Uploading...</p>
               ) : (
